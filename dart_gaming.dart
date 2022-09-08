@@ -64,8 +64,15 @@ bool pode_votar(int nasc, [int atual = 2022]) {
   }
   return false;
 }
-//15.
-double calcular_media(nota1, nota2) => (nota1 + nota2) / 2;
+//15 e 36.
+media_vetor(dito_cujo) {
+  int tam = dito_cujo.length;
+  var soma = dito_cujo[0];
+  for (int i = 1; i < tam; i++) {
+    soma += dito_cujo[i];
+  }
+  return soma / tam;
+}
 
 //16.
 bool is_par(int n) {
@@ -146,24 +153,66 @@ void sortear(numeros, over5, by3) {
 }
 
 //35.
-double maior_preco(vetor) {
-  double menor = vetor[0];
+menorzin(vetor) {
+  var menor = vetor[0];
   for (int i = 0; i < vetor.length; i++) {
-    if (vetor[i] > menor) {
+    if (vetor[i] < menor) {
       menor = vetor[i];
     }
   }
   return menor;
 }
-double menor_preco(vetor) {
-  double maior = vetor[0];
+maiorzin(vetor) {
+  var maior = vetor[0];
   for (int i = 0; i < vetor.length; i++) {
-    if (vetor[i] < maior) {
+    if (vetor[i] > maior) {
       maior = vetor[i];
     }
   }
   return maior;
 }
+
+//36.
+int select_up(arr) {
+  int count = 0;
+  int tam = arr.length;
+  for (int i = 0; i < tam; i++) {
+    if (arr[i] >= 18) {
+      count++;
+    }
+  }
+  return count;
+}
+int select_down(arr) {
+  int count = 0;
+  int tam = arr.length;
+  for (int i = 0; i < tam; i++) {
+    if (arr[i] < 5) {
+      count++;
+    }
+  }
+  return count;
+}
+
+//37.
+class Pessoa {
+  late int idade;
+  late String sexo;
+}
+void sort_mf(p, womyn, myn, idades) {
+  for (int i = 0; i < 5; i++) {
+    if (p[i].sexo == 'mulher') {
+      womyn.add(p[i]);
+    }
+    if (p[i].sexo == 'homem') {
+      myn.add(p[i]);
+    }
+    idades.add(p[i].idade);
+    print("Pessoa ${i+1}: ${p[i].idade} anos, ${p[i].sexo}.");
+  }
+}
+
+
 
 
 
@@ -407,7 +456,8 @@ void main() {
               if ((n1_i != null) && (n2_i != null)) {
                 double nota1 = double.parse(n1_i);
                 double nota2 = double.parse(n2_i);
-                double media = calcular_media(nota1, nota2);
+                List<double> notas = [nota1, nota2];
+                double media = media_vetor(notas);
                 print("A média é $media.");
                 if (media >= 7.0) {
                   print("É um bom aproveitamento.");
@@ -485,12 +535,53 @@ void main() {
                 double preco = (input != null) ? double.parse(input) : 0.0;
                 vetor.add(preco);
               }
-              print("O menor preço da lista é ${menor_preco(vetor)}, e o maior é ${maior_preco(vetor)}.");
+              print("O menor preço da lista é ${menorzin(vetor)}, e o maior é ${maiorzin(vetor)}.");
             }
             break;
           case 36:
             {
-              print("${DateTime.now().year}.");
+              List<int> idades = [];
+              int i = 0;
+              while (i < 10) {
+                print("Idade pessoa ${i+1}: ");
+                String? in_p = stdin.readLineSync();
+                if(in_p != null) {
+                  idades.add(int.parse(in_p));
+                  i++;
+                } else {
+                  print("Não envie campo vazio.");
+                }
+              }
+              print("A média das idades é ${media_vetor(idades)}.");
+              print("Há ${select_up(idades)} pessoas acima de 18 anos.");
+              print("Há ${select_down(idades)} pessoas abaixo de 5 anos.");
+              print("A maior idade lida foi ${maiorzin(idades)}.");
+            }
+            break;
+          case 37:
+            {
+              int i = 0;
+              Pessoa pessoa1 = Pessoa(), pessoa2 = Pessoa(), pessoa3 = Pessoa(), pessoa4 = Pessoa(), pessoa5 = Pessoa();
+              List<Pessoa> people = [pessoa1, pessoa2, pessoa3, pessoa4, pessoa5];
+              List<Pessoa> womyn = [];
+              List<Pessoa> myn = [];
+              List<int> idades = [];
+              while (i < 5) {
+                print("Insira a idade da pessoa ${i+1}: ");
+                String? input37a = stdin.readLineSync();
+                print("Insira o sexo da pessoa ${i+1} [homem/mulher]: ");
+                String? input37b = stdin.readLineSync();
+                if((input37a != null) && (input37b != null)) {
+                  people[i].idade = int.parse(input37a);
+                  people[i].sexo = input37b;
+                  i++;
+                } else {
+                  print("Não envie campo vazio.");
+                }
+              }
+              sort_mf(people, womyn, myn, idades);
+              print("Quantidade de mulheres: ${womyn.length}. Quantidade de homens: ${myn.length}.");
+              print("Media de idade do grupo: ${media_vetor(idades)}.");
             }
             break;
       default:
@@ -500,7 +591,7 @@ void main() {
       print("Deseja consultar outro exercício? [s/n]");
       String? resposta = stdin.readLineSync();
       while ((resposta != 'n' && resposta != 's')) {
-        print("Insira uma resposta válida");
+        print("Insira uma resposta válida: [s/n]");
         resposta = stdin.readLineSync();
       }
       if (resposta == 'n') {
