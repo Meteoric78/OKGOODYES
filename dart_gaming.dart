@@ -13,8 +13,10 @@ import 'dart:math';
 void falhou() {
   print("Não pode haver campo nulo.");
 }
+
 //1 e 2.
-double calcular_salario(salario, [percent = 25.00]) => salario + (salario * percent) / 100.00;
+double calcular_salario(salario, [percent = 25.00]) =>
+    salario + (salario * percent) / 100.00;
 
 //3 todo output na main ao invés daqui.
 void calcular_idade(int birth, [int current = 2022]) {
@@ -22,11 +24,12 @@ void calcular_idade(int birth, [int current = 2022]) {
   int meses = anos * 12;
   int dias = meses * 30;
   int semanas = meses * 4;
-  print("Idade,\nem anos: $anos\nem meses: $meses\nem dias: $dias\nem semanas: $semanas.");
+  print(
+      "Idade,\nem anos: $anos\nem meses: $meses\nem dias: $dias\nem semanas: $semanas.");
 }
 
 //4.
-double racao_restante(peso,  porcao) => peso - 5.0 * porcao * 2.0;
+double racao_restante(peso, porcao) => peso - 5.0 * porcao * 2.0;
 
 //5 todo: output na main ao invés daqui.
 void swap(a, b) {
@@ -40,13 +43,13 @@ void swap(a, b) {
 double calcular_volume(comp, larg, alt) => comp * larg * alt;
 
 //7.
-int square_diff(a, b) => (a-b) * (a-b);
+int square_diff(a, b) => (a - b) * (a - b);
 
 //8.
 double real_dolar(r, cot) => r / cot;
 
 //9.
-square_sum(a, b, c) => (a+b+c) * (a+b+c);
+square_sum(a, b, c) => (a + b + c) * (a + b + c);
 
 //10.
 double soma(a, b) => a + b;
@@ -55,7 +58,7 @@ double multi(a, b) => a * b;
 double div(a, b) => a / b;
 
 //11.
-double volume_esfera(raio) =>  (4 / 3) * 3.14159 * (raio) * (raio) * (raio); 
+double volume_esfera(raio) => (4 / 3) * 3.14159 * (raio) * (raio) * (raio);
 
 //14.
 bool pode_votar(int nasc, [int atual = 2022]) {
@@ -64,6 +67,7 @@ bool pode_votar(int nasc, [int atual = 2022]) {
   }
   return false;
 }
+
 //15 e 36.
 media_vetor(dito_cujo) {
   int tam = dito_cujo.length;
@@ -123,7 +127,7 @@ void par_sort([List<int> array = const [1, 2, 3, 4, 5, 6]]) {
   List<int> parzinhos = [];
   List<int> imparezinhos = [];
   int pares = 0, impares = 0;
-  for (int i = 0; i < array.length ; i++) {
+  for (int i = 0; i < array.length; i++) {
     if (array[i] % 2 == 0) {
       parzinhos.add(array[i]);
       pares++;
@@ -162,6 +166,7 @@ menorzin(vetor) {
   }
   return menor;
 }
+
 maiorzin(vetor) {
   var maior = vetor[0];
   for (int i = 0; i < vetor.length; i++) {
@@ -183,6 +188,7 @@ int select_up(arr) {
   }
   return count;
 }
+
 int select_down(arr) {
   int count = 0;
   int tam = arr.length;
@@ -199,40 +205,28 @@ class Pessoa {
   late int idade;
   late String sexo;
 }
-void sort_mf(p, womyn, myn, idades) {
+
+void sort_mf(p, womyn, myn, idades, h_idades) {
   for (int i = 0; i < 5; i++) {
     if (p[i].sexo == 'mulher') {
       womyn.add(p[i]);
     }
     if (p[i].sexo == 'homem') {
       myn.add(p[i]);
+      h_idades.add(p[i].idade);
     }
     idades.add(p[i].idade);
-    print("Pessoa ${i+1}: ${p[i].idade} anos, ${p[i].sexo}.");
+    //print("Pessoa ${i + 1}: ${p[i].idade} anos, ${p[i].sexo}.").
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 int menu() {
   print("Digite um número de 1 a 44 para acessar um exercício.");
   print("Digite 0 para Sair.");
   String? aux = stdin.readLineSync();
   return (aux != null) ? int.parse(aux) : -1;
-
 }
+
 void main() {
   int op;
   do {
@@ -282,7 +276,6 @@ void main() {
             int birth = int.parse(nascimento);
             int current = int.parse(atual);
             calcular_idade(birth, current);
-            
           } else {
             falhou();
           }
@@ -291,7 +284,7 @@ void main() {
       case 4:
         {
           print("Insira o peso do saco de ração");
-          String? peso_i = stdin.readLineSync(); 
+          String? peso_i = stdin.readLineSync();
           print("Insira a quantidade de ração para cada gato");
           String? porcao_i = stdin.readLineSync();
           if ((peso_i != null) && (porcao_i != null)) {
@@ -314,7 +307,6 @@ void main() {
             double a = double.parse(a_i);
             double b = double.parse(b_i);
             swap(a, b);
-            
           } else {
             falhou();
           }
@@ -328,7 +320,7 @@ void main() {
           String? larg_i = stdin.readLineSync();
           print("Altura: ");
           String? alt_i = stdin.readLineSync();
-          if ((comp_i != null ) && (larg_i != null) && (alt_i != null)) {
+          if ((comp_i != null) && (larg_i != null) && (alt_i != null)) {
             double comp = double.parse(comp_i);
             double larg = double.parse(larg_i);
             double alt = double.parse(alt_i);
@@ -348,7 +340,7 @@ void main() {
           if ((a_i != null) && (b_i != null)) {
             int a = int.parse(a_i);
             int b = int.parse(b_i);
-            int resultado = square_diff(a,b);
+            int resultado = square_diff(a, b);
             print("O quadrado da diferença de $a e $b é $resultado.");
           } else {
             falhou();
@@ -390,200 +382,212 @@ void main() {
           }
         }
         break;
-        case 10: 
-          {
-            print("Valor a: ");
-            String? a_i = stdin.readLineSync();
-            print("Valor b:");
-            String? b_i = stdin.readLineSync();
-            if ((a_i != null) && (b_i != null)) {
-              double a = double.parse(a_i);
-              double b = double.parse(b_i);
-              print("Termos: $a e $b,\nSoma: ${soma(a,b)}\nSubtração: ${sub(a,b)}\nDivisão: ${div(a,b)}\nMultiplicação: ${multi(a,b)}.");
+      case 10:
+        {
+          print("Valor a: ");
+          String? a_i = stdin.readLineSync();
+          print("Valor b:");
+          String? b_i = stdin.readLineSync();
+          if ((a_i != null) && (b_i != null)) {
+            double a = double.parse(a_i);
+            double b = double.parse(b_i);
+            print(
+                "Termos: $a e $b,\nSoma: ${soma(a, b)}\nSubtração: ${sub(a, b)}\nDivisão: ${div(a, b)}\nMultiplicação: ${multi(a, b)}.");
+          } else {
+            falhou();
+          }
+        }
+        break;
+      case 11:
+        {
+          print("Raio: ");
+          String? r_i = stdin.readLineSync();
+          double raio = (r_i != null) ? double.parse(r_i) : 0.0;
+          print(
+              "O volume de uma esfera com raio $raio é ${volume_esfera(raio)}.");
+        }
+        break;
+      case 12:
+        {
+          print("Insira um número inteiro");
+          String? n_i = stdin.readLineSync();
+          int n = (n_i != null) ? int.parse(n_i) : 0;
+          print(
+              "O predecessor e sucessor de $n são, respectivamente: ${n - 1} e ${n + 1}.");
+        }
+        break;
+      case 13:
+        {
+          print("Insira a velocidade do carro: ");
+          String? v_i = stdin.readLineSync();
+          int v = (v_i != null) ? int.parse(v_i) : 0;
+          if (v > 80) {
+            print("Motorista multado, valor: ${(v - 80) * 5} reais.");
+          } else {
+            print("O carro não excedeu o limite de velocidade.");
+          }
+        }
+        break;
+      case 14:
+        {
+          print("Insira data de nascimento: ");
+          String? nasc_i = stdin.readLineSync();
+          int nasc = (nasc_i != null) ? int.parse(nasc_i) : 0;
+          if (pode_votar(nasc)) {
+            print("Pode votar.");
+          } else {
+            print("Não pode votar.");
+          }
+        }
+        break;
+      case 15:
+        {
+          print("Insira nome do aluno: ");
+          String? nome_i = stdin.readLineSync();
+          print("Insira nota 1: ");
+          String? n1_i = stdin.readLineSync();
+          print("Insira nota 2: ");
+          String? n2_i = stdin.readLineSync();
+          if ((n1_i != null) && (n2_i != null)) {
+            double nota1 = double.parse(n1_i);
+            double nota2 = double.parse(n2_i);
+            List<double> notas = [nota1, nota2];
+            double media = media_vetor(notas);
+            print("A média é $media.");
+            if (media >= 7.0) {
+              print("É um bom aproveitamento.");
             } else {
-              falhou();
+              print("Não é um bom aproveitamento.");
             }
+          } else {
+            falhou();
           }
-          break;
-        case 11:
-          {
-            print("Raio: ");
-            String? r_i = stdin.readLineSync();
-            double raio = (r_i != null) ? double.parse(r_i) : 0.0;
-            print("O volume de uma esfera com raio $raio é ${volume_esfera(raio)}.");
+        }
+        break;
+      case 16:
+        {
+          print("Insira um número inteiro: ");
+          String? n_i = stdin.readLineSync();
+          int n = (n_i != null) ? int.parse(n_i) : 0;
+          if (is_par(n)) {
+            print("Número par.");
+          } else {
+            print("Número ímpar.");
           }
-          break;
-        case 12:
-          {
-            print("Insira um número inteiro");
-            String? n_i = stdin.readLineSync();
-            int n = (n_i != null) ? int.parse(n_i) : 0;
-            print("O predecessor e sucessor de $n são, respectivamente: ${n-1} e ${n+1}.");
+        }
+        break;
+      case 17:
+        {
+          print("Insira data de nascimento: ");
+          String? kekw = stdin.readLineSync();
+          int kek = (kekw != null) ? int.parse(kekw) : 0;
+          int idade = idade_simples(kek);
+          if (idade < 18) {
+            print("Faltam ${18 - idade} anos para o alistamento militar.");
+          } else {
+            print("Se passaram ${idade - 18} anos do alistamento militar.");
           }
-          break;
-        case 13:
-          {
-            print("Insira a velocidade do carro: ");
-            String? v_i = stdin.readLineSync();
-            int v = (v_i != null) ? int.parse(v_i) : 0;
-            if (v > 80) {
-              print("Motorista multado, valor: ${(v-80) * 5} reais.");
+        }
+        break;
+      case 30:
+        {
+          print("Contagem regressiva: ");
+          final_countdown();
+        }
+        break;
+      case 31:
+        {
+          print("Soma 6 + 8 + ... + 98 + 100: ");
+          print("${somatorio(op)}");
+        }
+        break;
+      case 32:
+        {
+          print("Soma 500 + 450 + 400 + ... + 50 + 0: ");
+          print("${somatorio(op)}");
+        }
+        break;
+      case 33:
+        {
+          par_sort();
+        }
+        break;
+      case 34:
+        {
+          List<int> numeros = [];
+          List<int> over5 = [];
+          List<int> by3 = [];
+          sortear(numeros, over5, by3);
+          print(
+              "Números sorteados: $numeros\nNúmeros acima de 5: ${over5.length}\nNúmeros divisíveis por 3: ${by3.length}.");
+        }
+        break;
+      case 35:
+        {
+          List<double> vetor = [];
+          for (int i = 1; i <= 8; i++) {
+            print("Insira preço $i: ");
+            String? input = stdin.readLineSync();
+            double preco = (input != null) ? double.parse(input) : 0.0;
+            vetor.add(preco);
+          }
+          print(
+              "O menor preço da lista é ${menorzin(vetor)}, e o maior é ${maiorzin(vetor)}.");
+        }
+        break;
+      case 36:
+        {
+          List<int> idades = [];
+          int i = 0;
+          while (i < 10) {
+            print("Idade pessoa ${i + 1}: ");
+            String? in_p = stdin.readLineSync();
+            if (in_p != null) {
+              idades.add(int.parse(in_p));
+              i++;
             } else {
-              print("O carro não excedeu o limite de velocidade.");
+              print("Não envie campo vazio.");
             }
           }
-          break;
-          case 14:
-            {
-              print("Insira data de nascimento: ");
-              String? nasc_i = stdin.readLineSync();
-              int nasc = (nasc_i != null) ? int.parse(nasc_i) : 0;
-              if (pode_votar(nasc)) {
-                print("Pode votar.");
-              } else {
-                print("Não pode votar.");
-              }
+          print("A média das idades é ${media_vetor(idades)}.");
+          print("Há ${select_up(idades)} pessoas acima de 18 anos.");
+          print("Há ${select_down(idades)} pessoas abaixo de 5 anos.");
+          print("A maior idade lida foi ${maiorzin(idades)}.");
+        }
+        break;
+      case 37:
+        {
+          int i = 0;
+          Pessoa pessoa1 = Pessoa(),
+              pessoa2 = Pessoa(),
+              pessoa3 = Pessoa(),
+              pessoa4 = Pessoa(),
+              pessoa5 = Pessoa();
+          List<Pessoa> people = [pessoa1, pessoa2, pessoa3, pessoa4, pessoa5];
+          List<Pessoa> womyn = [];
+          List<Pessoa> myn = [];
+          List<int> idades = [];
+          List<int> h_idades = [];
+          while (i < 5) {
+            print("Insira a idade da pessoa ${i + 1}: ");
+            String? input37a = stdin.readLineSync();
+            print("Insira o sexo da pessoa ${i + 1} [homem/mulher]: ");
+            String? input37b = stdin.readLineSync();
+            if ((input37a != null) && (input37b != null)) {
+              people[i].idade = int.parse(input37a);
+              people[i].sexo = input37b;
+              i++;
+            } else {
+              print("Não envie campo vazio.");
             }
-            break;
-          case 15:
-            {
-              print("Insira nome do aluno: ");
-              String? nome_i = stdin.readLineSync();
-              print("Insira nota 1: ");
-              String? n1_i = stdin.readLineSync();
-              print("Insira nota 2: ");
-              String? n2_i = stdin.readLineSync();
-              if ((n1_i != null) && (n2_i != null)) {
-                double nota1 = double.parse(n1_i);
-                double nota2 = double.parse(n2_i);
-                List<double> notas = [nota1, nota2];
-                double media = media_vetor(notas);
-                print("A média é $media.");
-                if (media >= 7.0) {
-                  print("É um bom aproveitamento.");
-                } else {
-                  print("Não é um bom aproveitamento.");
-                }
-              } else {
-                falhou();
-              }
-            }
-            break;
-          case 16:
-            {
-              print("Insira um número inteiro: ");
-              String? n_i = stdin.readLineSync();
-              int n = (n_i != null) ? int.parse(n_i) : 0;
-              if (is_par(n)) {
-                print("Número par.");
-              } else {
-                print("Número ímpar.");
-              }
-            }
-            break;
-          case 17:
-            {
-              print("Insira data de nascimento: ");
-              String? kekw = stdin.readLineSync();
-              int kek = (kekw != null) ? int.parse(kekw) : 0;
-              int idade = idade_simples(kek);
-              if (idade < 18) {
-                print("Faltam ${18-idade} anos para o alistamento militar.");
-              } else {
-                print("Se passaram ${idade-18} anos do alistamento militar.");
-              }
-            }
-            break;
-          case 30:
-            {
-              print("Contagem regressiva: ");
-              final_countdown();
-            }
-            break;
-          case 31:
-            {
-              print("Soma 6 + 8 + ... + 98 + 100: ");
-              print("${somatorio(op)}");
-            }
-            break;
-          case 32:
-            {
-              print("Soma 500 + 450 + 400 + ... + 50 + 0: ");
-              print("${somatorio(op)}");
-            }
-            break;
-          case 33:
-            {
-              par_sort();
-            }
-            break;
-          case 34:
-            {
-              List<int> numeros = [];
-              List<int> over5 = [];
-              List<int> by3 = [];
-              sortear(numeros, over5, by3);
-              print("Números sorteados: $numeros\nNúmeros acima de 5: ${over5.length}\nNúmeros divisíveis por 3: ${by3.length}.");
-            }
-            break;
-          case 35:
-            {
-              List<double> vetor = [];
-              for (int i = 1; i <= 8; i++) {
-                print("Insira preço $i: ");
-                String? input = stdin.readLineSync();
-                double preco = (input != null) ? double.parse(input) : 0.0;
-                vetor.add(preco);
-              }
-              print("O menor preço da lista é ${menorzin(vetor)}, e o maior é ${maiorzin(vetor)}.");
-            }
-            break;
-          case 36:
-            {
-              List<int> idades = [];
-              int i = 0;
-              while (i < 10) {
-                print("Idade pessoa ${i+1}: ");
-                String? in_p = stdin.readLineSync();
-                if(in_p != null) {
-                  idades.add(int.parse(in_p));
-                  i++;
-                } else {
-                  print("Não envie campo vazio.");
-                }
-              }
-              print("A média das idades é ${media_vetor(idades)}.");
-              print("Há ${select_up(idades)} pessoas acima de 18 anos.");
-              print("Há ${select_down(idades)} pessoas abaixo de 5 anos.");
-              print("A maior idade lida foi ${maiorzin(idades)}.");
-            }
-            break;
-          case 37:
-            {
-              int i = 0;
-              Pessoa pessoa1 = Pessoa(), pessoa2 = Pessoa(), pessoa3 = Pessoa(), pessoa4 = Pessoa(), pessoa5 = Pessoa();
-              List<Pessoa> people = [pessoa1, pessoa2, pessoa3, pessoa4, pessoa5];
-              List<Pessoa> womyn = [];
-              List<Pessoa> myn = [];
-              List<int> idades = [];
-              while (i < 5) {
-                print("Insira a idade da pessoa ${i+1}: ");
-                String? input37a = stdin.readLineSync();
-                print("Insira o sexo da pessoa ${i+1} [homem/mulher]: ");
-                String? input37b = stdin.readLineSync();
-                if((input37a != null) && (input37b != null)) {
-                  people[i].idade = int.parse(input37a);
-                  people[i].sexo = input37b;
-                  i++;
-                } else {
-                  print("Não envie campo vazio.");
-                }
-              }
-              sort_mf(people, womyn, myn, idades);
-              print("Quantidade de mulheres: ${womyn.length}. Quantidade de homens: ${myn.length}.");
-              print("Media de idade do grupo: ${media_vetor(idades)}.");
-            }
-            break;
+          }
+          sort_mf(people, womyn, myn, idades, h_idades);
+          print(
+              "Quantidade de mulheres: ${womyn.length}. Quantidade de homens: ${myn.length}.");
+          print("Media de idade do grupo: ${media_vetor(idades)}.");
+          print("Media de idade dos homens: ${media_vetor(h_idades)}.");
+        }
+        break;
       default:
         print("Opção inválida ou não implementada.");
     }
