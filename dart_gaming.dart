@@ -206,18 +206,32 @@ class Pessoa {
   late String sexo;
 }
 
-void sort_mf(p, womyn, myn, idades, h_idades) {
+void sort_mf(p, womyn, myn, idades, h_idades, m_idades) {
   for (int i = 0; i < 5; i++) {
-    if (p[i].sexo == 'mulher') {
+    if (p[i].sexo == 'M') {
       womyn.add(p[i]);
+      m_idades.add(p[i].idade);
     }
-    if (p[i].sexo == 'homem') {
+    if (p[i].sexo == 'H') {
       myn.add(p[i]);
       h_idades.add(p[i].idade);
     }
     idades.add(p[i].idade);
     //print("Pessoa ${i + 1}: ${p[i].idade} anos, ${p[i].sexo}.").
   }
+}
+
+//43.
+class Identidade {
+  late String nome;
+  late int idade;
+}
+
+//44.
+class Funcionario {
+  late String nome;
+  late String sexo;
+  late double salario;
 }
 
 int menu() {
@@ -557,7 +571,6 @@ void main() {
         break;
       case 37:
         {
-          int i = 0;
           Pessoa pessoa1 = Pessoa(),
               pessoa2 = Pessoa(),
               pessoa3 = Pessoa(),
@@ -568,10 +581,12 @@ void main() {
           List<Pessoa> myn = [];
           List<int> idades = [];
           List<int> h_idades = [];
+          List<int> m_idades = [];
+          int i = 0;
           while (i < 5) {
             print("Insira a idade da pessoa ${i + 1}: ");
             String? input37a = stdin.readLineSync();
-            print("Insira o sexo da pessoa ${i + 1} [homem/mulher]: ");
+            print("Insira o sexo da pessoa ${i + 1} [H/M]: ");
             String? input37b = stdin.readLineSync();
             if ((input37a != null) && (input37b != null)) {
               people[i].idade = int.parse(input37a);
@@ -581,15 +596,172 @@ void main() {
               print("Não envie campo vazio.");
             }
           }
-          sort_mf(people, womyn, myn, idades, h_idades);
-          print(
-              "Quantidade de mulheres: ${womyn.length}. Quantidade de homens: ${myn.length}.");
+          sort_mf(people, womyn, myn, idades, h_idades, m_idades);
+          print("Quantidade de mulheres: ${womyn.length}. Quantidade de homens: ${myn.length}.");
           print("Media de idade do grupo: ${media_vetor(idades)}.");
           print("Media de idade dos homens: ${media_vetor(h_idades)}.");
+          print("Quantidade de mulheres acima de 20 anos: ${m_idades.where((e) => e > 20).length}.");
+        }
+        break;
+      case 38:
+        {
+          print("Insira 10 valores inteiros");
+          List<int> valores = [];
+          int i = 0;
+          while (i < 10) {
+            String? input38 = stdin.readLineSync();
+            if (input38 != null) {
+              valores.add(int.parse(input38));
+              i++;
+            } else {
+              print("Insira valor válido.");
+            }
+          }
+          List<int> pares = [];
+          List<int> pos = [];
+          for (int i = 0; i < valores.length; i++) {
+            if (is_par(valores[i])) {
+              pares.add(valores[i]);
+              pos.add(i+1);
+            } 
+          }
+          print("Valores pares: $pares.");
+          print("Respectivas posições: $pos.");
+        }
+        break;
+      case 39:
+        {
+          var randoseru = [];
+          for (int i = 0; i < 20; i++) {
+            randoseru.add(Random().nextInt(21));
+          }
+          print("Sorteados: $randoseru.");
+        }
+        break;
+      case 40:
+        {
+          print("Insira 8 idades");
+          List<int> ages = [];
+          int i = 0;
+          while (i < 8) {
+            String? input40 = stdin.readLineSync();
+            if (input40 != null) {
+              ages.add(int.parse(input40));
+              i++;
+            } else {
+              print("Insira valor válido.");
+            }
+          }
+          print("A média das idades é ${media_vetor(ages)}.");
+          var pst = [];
+          ages.forEach((e) {
+            if (e >= 25) {
+              pst.add(ages.indexOf(e)+1);
+            }
+          });
+          print("Posições das pessoas acima de 25 anos: $pst.");
+          print("Maior idade: ${maiorzin(ages)}. Posição: ${ages.indexOf(maiorzin(ages))+1}.");
+        }
+        break;
+      case 42:
+        {
+          var fest = List<int>.filled(20, 0);
+          for (int i = 0; i < 20; i++) {
+            fest[i] = Random().nextInt(99);
+          }
+          print("Vetor aleatório: $fest");
+          fest.sort();
+          print("Organizado: ${fest}");
+        }
+        break;
+      case 43:
+        {
+          List<String> nomes43 = [];
+          List<int> idades43 = [];
+          int i = 0;
+          while (i < 9) {
+            print("Insira o nome da pessoa ${i + 1}: ");
+            String? input43a = stdin.readLineSync();
+            print("Insira a idade da pessoa ${i + 1}: ");
+            String? input43b = stdin.readLineSync();
+            if ((input43a != null) && (input43b != null)) {
+              String temp = input43a;
+              nomes43.add(temp);
+              idades43.add(int.parse(input43b));
+              i++;
+            } else {
+              print("Não envie campo vazio.");
+            }
+          }
+          Identidade id1 = Identidade(),
+            id2 = Identidade(),
+            id3 = Identidade(),
+            id4 = Identidade(),
+            id5 = Identidade(),
+            id6 = Identidade(),
+            id7 = Identidade(),
+            id8 = Identidade(),
+            id9 = Identidade();
+          List<Identidade> gotmyid = [id1, id2, id3, id4, id5, id6, id7, id8, id9];
+          List<Identidade> res = [];
+          for (int i = 0; i < 9; i++) {
+            if(idades43[i] < 18) {
+              gotmyid[i].nome = nomes43[i]; 
+              gotmyid[i].idade = idades43[i];
+              res.add(gotmyid[i]);
+            }
+          }
+          for (int i = 0; i < res.length; i++) {
+            print("${res[i].nome}. ${res[i].idade} anos.");
+          }
+        }
+        break;
+      case 44:
+        {
+          List<String> nomes44 = [];
+          List<String> sexos44 = [];
+          List<double> salarios44 = [];
+          int i = 0;
+          while (i < 5) {
+            print("Insira o nome da pessoa ${i + 1}: ");
+            String? input44a = stdin.readLineSync();
+            print("Insira o sexo da pessoa ${i + 1}: [H/M]");
+            String? input44b = stdin.readLineSync();
+            print("Insira o salário da pessoa ${i + 1}: ");
+            String? input44c = stdin.readLineSync();
+            if ((input44a != null) && (input44b != null) && (input44c != null)) {
+              String temp1 = input44a;
+              String temp2 = input44b;
+              nomes44.add(temp1);
+              sexos44.add(temp2);
+              salarios44.add(double.parse(input44c));
+              i++;
+            } else {
+              print("Não envie campo vazio.");
+            }
+          }
+          Funcionario f1 = Funcionario(),
+            f2 = Funcionario(),
+            f3 = Funcionario(),
+            f4 = Funcionario(),
+            f5 = Funcionario();
+          List<Funcionario> torcida_jovem_do_gremio = [f1, f2, f3, f4, f5];
+          List<Funcionario> divas_pop = [];
+          for (int i = 0; i < 5; i++) {
+            if ((sexos44[i] == 'M') && (salarios44[i] > 5000.0)) {
+              torcida_jovem_do_gremio[i].nome = nomes44[i];
+              torcida_jovem_do_gremio[i].sexo = sexos44[i];
+              torcida_jovem_do_gremio[i].salario = salarios44[i];
+              divas_pop.add(torcida_jovem_do_gremio[i]);
+            }
+          }
+          for (int i = 0; i < divas_pop.length; i++) {
+            print("${divas_pop[i].nome}. ${divas_pop[i].sexo}. R\$${divas_pop[i].salario}.");
+          }
         }
         break;
       default:
-        print("Opção inválida ou não implementada.");
+        print("Opção inválida ou exercício não implementado.");
     }
     if (op != 0) {
       print("Deseja consultar outro exercício? [s/n]");
