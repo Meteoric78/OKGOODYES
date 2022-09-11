@@ -1,17 +1,17 @@
 import 'dart:io';
 import 'dart:math';
 
-/*Input com null safety
-  print("");
-          print("");
-          String? x = stdin.readLineSync();
-          if (( != null) && ( != null)) {
-            var = .parse();
-            var = .parse();
-          }. */
 //mensagem de erro para input null.
-void falhou() {
-  print("Não pode haver campo nulo.");
+class ValorNuloException implements Exception {
+    @override
+    String toString() {
+      return "ValorNuloException";
+    }
+  }
+void falhou(e) {
+  print("Não foi possível: $e");
+  print("Valor nulo inserido.");
+  //throw ValorNuloException();
 }
 
 //1 e 2.
@@ -255,13 +255,16 @@ void main() {
         {
           print("Informe o salário do funcionário");
           String? valor = stdin.readLineSync();
-          if (valor != null) {
+          try {
+            if (valor != null) {
             double salario = double.parse(valor);
             double resultado = calcular_salario(salario);
             print("O salario de $salario será reajustado para $resultado.");
-          } else {
-            print("O salário não pode ser nulo.");
           }
+          } catch (e) {
+            falhou(e);
+          }
+          
         }
         break;
       case 2:
@@ -270,13 +273,15 @@ void main() {
           String? valor = stdin.readLineSync();
           print("Informe o valor de reajsute");
           String? ajuste = stdin.readLineSync();
+          try {
           if ((valor != null) && (ajuste != null)) {
             double salario = double.parse(valor);
             double percent = double.parse(ajuste);
             double resultado = calcular_salario(salario, percent);
             print("O salario de $salario será reajustado para $resultado.");
-          } else {
-            falhou();
+          }
+          } catch(e) {
+            falhou(e);
           }
         }
         break;
@@ -286,12 +291,13 @@ void main() {
           String? nascimento = stdin.readLineSync();
           print("Informe o ano atual");
           String? atual = stdin.readLineSync();
+          try {
           if ((nascimento != null) && (atual != null)) {
             int birth = int.parse(nascimento);
             int current = int.parse(atual);
             calcular_idade(birth, current);
-          } else {
-            falhou();
+          }} catch(e) {
+            falhou(e);
           }
         }
         break;
@@ -301,13 +307,14 @@ void main() {
           String? peso_i = stdin.readLineSync();
           print("Insira a quantidade de ração para cada gato");
           String? porcao_i = stdin.readLineSync();
+          try {
           if ((peso_i != null) && (porcao_i != null)) {
             double peso = double.parse(peso_i);
             double porcao = double.parse(porcao_i);
             double resultado = racao_restante(peso, porcao);
             print("A ração restante após 5 dias de consumo é $resultado.");
-          } else {
-            falhou();
+          }} catch(e) {
+            falhou(e);
           }
         }
         break;
@@ -317,12 +324,13 @@ void main() {
           String? a_i = stdin.readLineSync();
           print("Insira valor b");
           String? b_i = stdin.readLineSync();
+          try {
           if ((a_i != null) && (b_i != null)) {
             double a = double.parse(a_i);
             double b = double.parse(b_i);
             swap(a, b);
-          } else {
-            falhou();
+          }} catch(e) {
+            falhou(e);
           }
         }
         break;
@@ -334,14 +342,15 @@ void main() {
           String? larg_i = stdin.readLineSync();
           print("Altura: ");
           String? alt_i = stdin.readLineSync();
+          try {
           if ((comp_i != null) && (larg_i != null) && (alt_i != null)) {
             double comp = double.parse(comp_i);
             double larg = double.parse(larg_i);
             double alt = double.parse(alt_i);
             double resultado = calcular_volume(comp, larg, alt);
             print("O volume será $resultado.");
-          } else {
-            falhou();
+          }} catch(e) {
+            falhou(e);
           }
         }
         break;
@@ -351,13 +360,14 @@ void main() {
           String? a_i = stdin.readLineSync();
           print("Insira valor B: ");
           String? b_i = stdin.readLineSync();
+          try {
           if ((a_i != null) && (b_i != null)) {
             int a = int.parse(a_i);
             int b = int.parse(b_i);
             int resultado = square_diff(a, b);
             print("O quadrado da diferença de $a e $b é $resultado.");
-          } else {
-            falhou();
+          }} catch(e) {
+            falhou(e);
           }
         }
         break;
@@ -367,13 +377,14 @@ void main() {
           String? r_i = stdin.readLineSync();
           print("Cotação atual do dólar");
           String? cot_i = stdin.readLineSync();
+          try {
           if ((r_i != null) && (cot_i != null)) {
             double r = double.parse(r_i);
             double cot = double.parse(cot_i);
             double resultado = real_dolar(r, cot);
             print("$r reais são $resultado dólares.");
-          } else {
-            falhou();
+          }} catch(e) {
+            falhou(e);
           }
         }
         break;
@@ -385,14 +396,15 @@ void main() {
           String? b_i = stdin.readLineSync();
           print("Valor c: ");
           String? c_i = stdin.readLineSync();
+          try {
           if ((a_i != null) && (b_i != null) && (c_i != null)) {
             int a = int.parse(a_i);
             int b = int.parse(b_i);
             int c = int.parse(c_i);
             int resultado = square_sum(a, b, c);
             print("O quadrado da soma de $a, $b, $c é $resultado.");
-          } else {
-            falhou();
+          }} catch(e) {
+            falhou(e);
           }
         }
         break;
@@ -402,13 +414,14 @@ void main() {
           String? a_i = stdin.readLineSync();
           print("Valor b:");
           String? b_i = stdin.readLineSync();
+          try {
           if ((a_i != null) && (b_i != null)) {
             double a = double.parse(a_i);
             double b = double.parse(b_i);
             print(
                 "Termos: $a e $b,\nSoma: ${soma(a, b)}\nSubtração: ${sub(a, b)}\nDivisão: ${div(a, b)}\nMultiplicação: ${multi(a, b)}.");
-          } else {
-            falhou();
+          }} catch(e) {
+            falhou(e);
           }
         }
         break;
@@ -462,6 +475,7 @@ void main() {
           String? n1_i = stdin.readLineSync();
           print("Insira nota 2: ");
           String? n2_i = stdin.readLineSync();
+          try {
           if ((n1_i != null) && (n2_i != null)) {
             double nota1 = double.parse(n1_i);
             double nota2 = double.parse(n2_i);
@@ -473,8 +487,8 @@ void main() {
             } else {
               print("Não é um bom aproveitamento.");
             }
-          } else {
-            falhou();
+          }} catch(e) {
+            falhou(e);
           }
         }
         break;
@@ -501,6 +515,158 @@ void main() {
           } else {
             print("Se passaram ${idade - 18} anos do alistamento militar.");
           }
+        }
+        break;
+      case 18:
+        {
+          print("Digite o nome: ");
+          String? input18a = stdin.readLineSync();
+          print("Digite o sexo: [h/m]");
+          String? input18b = stdin.readLineSync();
+          print("Digite o valor das compras: ");
+          String? input18c = stdin.readLineSync();
+          try {
+            if ((input18a != null) && (input18b != null) && (input18c != null)) {
+              String nome = input18a;
+              String sexo = input18b;
+              int preco = int.parse(input18c);
+              if (sexo == 'h') {
+                print("O preço final com o desconto ficou em: ${preco - (preco * 0.05)} para o $nome.");
+              }
+              if (sexo == 'm') {
+                print("O preço final com o desconto ficou em: ${preco - (preco * 0.13)} para a $nome.");
+              }
+            }
+          } catch(e) {
+            falhou(e);
+          }
+        }
+        break;
+      case 19:
+        {
+          print("Qual a distancia em KM que o passageiro deseja percorrer?");
+          String? input19 = stdin.readLineSync();
+          try {
+            if (input19 != null) {
+              int distancia = int.parse(input19);
+              if (distancia <= 200) {
+                print("O valor da passagem é de: ${0.5 * distancia}.");
+              } else {
+                print("O valor da passagem é de: ${0.45 * distancia}.");
+              }
+            } 
+          } catch(e) {
+            falhou(e);
+          }
+        }
+        break;
+      case 20:
+        {
+          //...?
+        }
+        break;
+      case 21:
+        {
+          print("Digite a primeira nota: ");
+          String? input21a = stdin.readLineSync();
+          print("Digite a segunda nota: ");
+          String? input21b = stdin.readLineSync();
+          try {
+          if ((input21a != null) && (input21b != null)) {
+            double nota1 = double.parse(input21a);
+            double nota2 = double.parse(input21b);
+            double media = (nota1 + nota2) / 2;
+            if (media <= 4.9) {
+              print("REPROVADO.");
+            } else if (media >= 5.0 && media <= 6.9) {
+              print("RECUPERAÇÃO.");
+            } else if (media >= 7.0) {
+              print("APROVADO.");
+            }
+          }
+          } catch(e) {
+            falhou(e);
+          }
+        }
+        break;
+      case 22:
+        {
+          print("Digite a largura: ");
+          String? input22a = stdin.readLineSync();
+          print("Digite o comprimento: ");
+          String? input22b = stdin.readLineSync();
+          try {
+          if ((input22a != null) && (input22b != null)) {
+            double largura = double.parse(input22a);
+            double comprimento = double.parse(input22b);
+            double area = largura * comprimento;
+            if (area < 100) {
+              print("TERRENO POPULAR");
+            } else if (area >= 100 && area <= 500) {
+              print("TERRENO MASTER");
+            } else if (area > 500) {
+              print("TERRENO VIP");
+            }
+          }
+          } catch(e) {
+            falhou(e);
+          }
+        }
+        break;
+      case 23:
+        {
+          print("Digite o nome do funcionário :");
+          String? input23a = stdin.readLineSync();
+          print("Digite o valor do salário: ");
+          String? input23b = stdin.readLineSync();
+          print("Há quantos anos esse funcionário trabalha na empresa? ");
+          String? input23c = stdin.readLineSync();
+          try {
+          if ((input23a != null) && (input23b != null) && (input23c != null)) {
+            String nome = input23a;
+            int salario = int.parse(input23b);
+            int anos = int.parse(input23c);
+            if (anos <= 3) {
+              print("O seu novo salário é de: ${salario + (salario * 0.03)}.");
+            } else if (anos > 3 && anos < 10) {
+              print("O seu novo salário é de: ${salario + (salario * 0.125)}.");
+            } else if (anos > 10) {
+              print("O seu novo salário é de: ${salario + (salario * 0.20)}.");
+            }
+          }
+          } catch(e) {
+            falhou(e);
+          }
+        }
+        break;
+      case 24:
+        {
+
+        }
+        break;
+      case 25:
+        {
+
+        }
+        break;
+      case 26:
+        {
+
+        }
+        break;
+      case 27:
+        {
+
+        }
+        break;
+      case 28:
+        {
+
+        }
+        break;
+      case 29:
+        {
+
         }
         break;
       case 30:
@@ -556,11 +722,12 @@ void main() {
           while (i < 10) {
             print("Idade pessoa ${i + 1}: ");
             String? in_p = stdin.readLineSync();
+            try {
             if (in_p != null) {
               idades.add(int.parse(in_p));
               i++;
-            } else {
-              print("Não envie campo vazio.");
+            }} catch(e) {
+              falhou(e);
             }
           }
           print("A média das idades é ${media_vetor(idades)}.");
@@ -588,12 +755,13 @@ void main() {
             String? input37a = stdin.readLineSync();
             print("Insira o sexo da pessoa ${i + 1} [H/M]: ");
             String? input37b = stdin.readLineSync();
+            try {
             if ((input37a != null) && (input37b != null)) {
               people[i].idade = int.parse(input37a);
               people[i].sexo = input37b;
               i++;
-            } else {
-              print("Não envie campo vazio.");
+            }} catch(e) {
+              falhou(e);
             }
           }
           sort_mf(people, womyn, myn, idades, h_idades, m_idades);
@@ -610,11 +778,12 @@ void main() {
           int i = 0;
           while (i < 10) {
             String? input38 = stdin.readLineSync();
+            try {
             if (input38 != null) {
               valores.add(int.parse(input38));
               i++;
-            } else {
-              print("Insira valor válido.");
+            }} catch(e) {
+              falhou(e);
             }
           }
           List<int> pares = [];
@@ -645,11 +814,12 @@ void main() {
           int i = 0;
           while (i < 8) {
             String? input40 = stdin.readLineSync();
+            try {
             if (input40 != null) {
               ages.add(int.parse(input40));
               i++;
-            } else {
-              print("Insira valor válido.");
+            }} catch(e) {
+              falhou(e);
             }
           }
           print("A média das idades é ${media_vetor(ages)}.");
@@ -684,13 +854,14 @@ void main() {
             String? input43a = stdin.readLineSync();
             print("Insira a idade da pessoa ${i + 1}: ");
             String? input43b = stdin.readLineSync();
+            try {
             if ((input43a != null) && (input43b != null)) {
               String temp = input43a;
               nomes43.add(temp);
               idades43.add(int.parse(input43b));
               i++;
-            } else {
-              print("Não envie campo vazio.");
+            }} catch(e) {
+              falhou(e);
             }
           }
           Identidade id1 = Identidade(),
@@ -729,6 +900,7 @@ void main() {
             String? input44b = stdin.readLineSync();
             print("Insira o salário da pessoa ${i + 1}: ");
             String? input44c = stdin.readLineSync();
+            try {
             if ((input44a != null) && (input44b != null) && (input44c != null)) {
               String temp1 = input44a;
               String temp2 = input44b;
@@ -736,8 +908,8 @@ void main() {
               sexos44.add(temp2);
               salarios44.add(double.parse(input44c));
               i++;
-            } else {
-              print("Não envie campo vazio.");
+            }} catch(e) {
+              falhou(e);
             }
           }
           Funcionario f1 = Funcionario(),
